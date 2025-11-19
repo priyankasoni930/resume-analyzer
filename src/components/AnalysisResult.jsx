@@ -7,11 +7,11 @@ const ScoreGauge = ({ score }) => {
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   return (
-    <div className="relative w-32 h-32 flex items-center justify-center">
+    <div className="relative w-24 h-24 flex items-center justify-center">
       <svg className="w-full h-full transform -rotate-90">
         <circle
-          cx="64"
-          cy="64"
+          cx="48"
+          cy="48"
           r="40"
           stroke="currentColor"
           strokeWidth="8"
@@ -22,8 +22,8 @@ const ScoreGauge = ({ score }) => {
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          cx="64"
-          cy="64"
+          cx="48"
+          cy="48"
           r="40"
           stroke="currentColor"
           strokeWidth="8"
@@ -36,8 +36,7 @@ const ScoreGauge = ({ score }) => {
         />
       </svg>
       <div className="absolute flex flex-col items-center">
-        <span className="text-4xl font-bold font-heading text-textPrimary tracking-tighter">{score}</span>
-        <span className="text-[10px] font-bold font-ui text-textTertiary tracking-widest uppercase">Match</span>
+        <span className="text-2xl font-bold font-heading text-textPrimary tracking-tighter">{score}</span>
       </div>
     </div>
   );
@@ -52,22 +51,41 @@ const AnalysisResult = ({ result }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6"
+      className="w-full max-w-4xl mx-auto space-y-6"
     >
-      {/* Score Card */}
-      <div className="md:col-span-1 bg-surface rounded-3xl p-8 border border-borderDefault flex flex-col items-center justify-center shadow-lg relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-br from-accentMuted/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <ScoreGauge score={score} />
-        <div className="mt-6 text-center relative z-10">
-          <h3 className="text-2xl font-bold font-heading text-textPrimary mb-1">
-            {score >= 80 ? 'Excellent Match' : score >= 60 ? 'Good Potential' : 'Needs Work'}
-          </h3>
-          <p className="text-sm font-ui text-textSecondary uppercase tracking-wider">Match Score</p>
+      {/* Score Card - Compact Horizontal Layout */}
+      <div className="bg-surface rounded-3xl p-6 border border-borderDefault shadow-lg relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-r from-accentMuted/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex items-center gap-6">
+            <ScoreGauge score={score} />
+            <div>
+              <h3 className="text-3xl font-bold font-heading text-textPrimary mb-1">
+                {score >= 80 ? 'Excellent Match' : score >= 60 ? 'Good Potential' : 'Needs Work'}
+              </h3>
+              <p className="text-sm font-ui text-textSecondary uppercase tracking-wider">Match Score Analysis</p>
+            </div>
+          </div>
+          <div className="hidden md:block h-16 w-px bg-borderLight" />
+          <div className="flex gap-8 text-center">
+            <div>
+              <span className="block text-2xl font-bold text-success">{matchedSkills.length}</span>
+              <span className="text-xs text-textTertiary uppercase tracking-wider">Matched</span>
+            </div>
+            <div>
+              <span className="block text-2xl font-bold text-error">{missingSkills.length}</span>
+              <span className="text-xs text-textTertiary uppercase tracking-wider">Missing</span>
+            </div>
+            <div>
+              <span className="block text-2xl font-bold text-accentPrimary">{suggestions.length}</span>
+              <span className="text-xs text-textTertiary uppercase tracking-wider">Tips</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Skills Analysis */}
-      <div className="md:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Skills Analysis */}
         <div className="bg-surface rounded-3xl p-8 border border-borderDefault hover:border-borderMedium transition-colors shadow-lg">
           <h3 className="text-xl font-bold font-heading text-textPrimary mb-6 flex items-center gap-3">
             <div className="p-2 rounded-lg bg-accentMuted text-accentPrimary">

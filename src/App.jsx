@@ -59,9 +59,9 @@ function App() {
         </header>
 
         <main className="space-y-12 animate-fade-in">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-8">
             <div className="bg-surface p-1 rounded-3xl border border-borderDefault shadow-lg">
-              <div className="bg-backgroundAlt rounded-[20px] p-6 h-full">
+              <div className="bg-backgroundAlt rounded-[20px] p-6">
                 <FileUpload 
                   file={file} 
                   onFileUpload={setFile} 
@@ -71,7 +71,7 @@ function App() {
             </div>
             
             <div className="bg-surface p-1 rounded-3xl border border-borderDefault shadow-lg">
-              <div className="bg-backgroundAlt rounded-[20px] p-6 h-full">
+              <div className="bg-backgroundAlt rounded-[20px] p-6">
                 <JobInput 
                   value={jobDescription} 
                   onChange={setJobDescription} 
