@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import FileUpload from './components/FileUpload';
 import JobInput from './components/JobInput';
 import AnalysisResult from './components/AnalysisResult';
@@ -12,6 +12,13 @@ function App() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const resultsRef = useRef(null);
+
+  useEffect(() => {
+    if (result && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [result]);
 
   const handleAnalyze = async () => {
     if (!file || !jobDescription) return;
@@ -135,7 +142,9 @@ function App() {
             </div>
           )}
 
-          <AnalysisResult result={result} />
+          <div ref={resultsRef}>
+            <AnalysisResult result={result} />
+          </div>
         </main>
       </div>
     </div>
