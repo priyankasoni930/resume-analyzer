@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = "AIzaSyCIFtYPMRi72Tmle62dpChIfgqyKFZsSAI"; // In production, use env var
+const API_KEY = ""; // In production, use env var
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 export const analyzeResume = async (resumeText, jobDescription) => {
