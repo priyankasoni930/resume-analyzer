@@ -59,50 +59,74 @@ function App() {
         </header>
 
         <main className="space-y-12 animate-fade-in">
-          <div className="flex flex-col gap-8">
-            <div className="bg-surface p-1 rounded-3xl border border-borderDefault shadow-lg">
-              <div className="bg-backgroundAlt rounded-[20px] p-6">
-                <FileUpload 
-                  file={file} 
-                  onFileUpload={setFile} 
-                  onClear={() => { setFile(null); setResult(null); }} 
-                />
-              </div>
-            </div>
-            
-            <div className="bg-surface p-1 rounded-3xl border border-borderDefault shadow-lg">
-              <div className="bg-backgroundAlt rounded-[20px] p-6">
-                <JobInput 
-                  value={jobDescription} 
-                  onChange={setJobDescription} 
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-center pt-4">
-            <button
-              onClick={handleAnalyze}
-              disabled={!file || !jobDescription || isAnalyzing}
-              className={`
-                group relative px-12 py-6 rounded-2xl font-bold font-ui text-lg transition-all duration-300 overflow-hidden
-                ${!file || !jobDescription 
-                  ? 'bg-btnSecondary text-textTertiary cursor-not-allowed border border-borderDefault' 
-                  : 'bg-btnPrimary text-textInverse hover:bg-btnPrimaryHover hover:scale-105 shadow-lg shadow-accentPrimary/30'
-                }
-              `}
-            >
-              {isAnalyzing ? (
-                <div className="flex items-center gap-3 relative z-10">
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Analyzing Profile...</span>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-surface rounded-[2.5rem] p-8 md:p-12 border border-borderDefault shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-accentPrimary via-accentSecondary to-accentPrimary opacity-20" />
+              
+              <div className="space-y-12">
+                {/* Step 1: Resume Upload */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-accentMuted flex items-center justify-center text-accentPrimary font-bold font-heading text-lg shadow-sm">1</div>
+                    <h2 className="text-2xl font-bold font-heading text-textPrimary">Upload Resume</h2>
+                  </div>
+                  <div className="pl-14">
+                    <FileUpload 
+                      file={file} 
+                      onFileUpload={setFile} 
+                      onClear={() => { setFile(null); setResult(null); }} 
+                    />
+                  </div>
                 </div>
-              ) : (
-                <span className="relative z-10 flex items-center gap-2">
-                  Analyze Match <Sparkles className="w-4 h-4" />
-                </span>
-              )}
-            </button>
+
+                {/* Divider */}
+                <div className="relative pl-14">
+                  <div className="absolute left-5 -top-12 bottom-0 w-px bg-borderDefault" />
+                  <div className="h-px w-full bg-borderDefault" />
+                </div>
+
+                {/* Step 2: Job Description */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-accentMuted flex items-center justify-center text-accentPrimary font-bold font-heading text-lg shadow-sm">2</div>
+                    <h2 className="text-2xl font-bold font-heading text-textPrimary">Job Description</h2>
+                  </div>
+                  <div className="pl-14">
+                    <JobInput 
+                      value={jobDescription} 
+                      onChange={setJobDescription} 
+                    />
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <div className="pl-14 pt-4">
+                  <button
+                    onClick={handleAnalyze}
+                    disabled={!file || !jobDescription || isAnalyzing}
+                    className={`
+                      w-full group relative px-8 py-5 rounded-xl font-bold font-ui text-lg transition-all duration-300 overflow-hidden flex items-center justify-center gap-3
+                      ${!file || !jobDescription 
+                        ? 'bg-backgroundAlt text-textTertiary cursor-not-allowed border border-borderDefault' 
+                        : 'bg-btnPrimary text-textInverse hover:bg-btnPrimaryHover shadow-lg shadow-accentPrimary/25 hover:shadow-xl hover:shadow-accentPrimary/30 hover:-translate-y-0.5'
+                      }
+                    `}
+                  >
+                    {isAnalyzing ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Analyzing Profile...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Analyze Match</span>
+                        <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           {error && (

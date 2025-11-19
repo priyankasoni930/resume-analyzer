@@ -23,12 +23,12 @@ const FileUpload = ({ onFileUpload, file, onClear }) => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       {!file ? (
         <div
           onDrop={handleDrop}
           onDragOver={handleDragOver}
-          className="h-full border-2 border-dashed border-borderDefault rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-accentPrimary/50 hover:bg-accentMuted/30 transition-all duration-300 cursor-pointer group"
+          className="w-full border-2 border-dashed border-borderMedium rounded-2xl p-10 flex flex-col items-center justify-center text-center hover:border-accentPrimary hover:bg-accentMuted/10 transition-all duration-300 cursor-pointer group bg-backgroundAlt/50"
         >
           <input
             type="file"
@@ -38,26 +38,29 @@ const FileUpload = ({ onFileUpload, file, onClear }) => {
             id="file-upload"
           />
           <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center w-full h-full justify-center">
-            <div className="w-16 h-16 bg-accentMuted rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-accentTertiary/20 transition-all duration-300 shadow-sm">
-              <Upload className="w-8 h-8 text-accentPrimary" />
+            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300 shadow-sm border border-borderLight">
+              <Upload className="w-8 h-8 text-accentPrimary group-hover:text-accentSecondary transition-colors" />
             </div>
-            <h3 className="text-lg font-bold font-heading text-textPrimary mb-2">Upload Resume</h3>
-            <p className="text-sm font-ui text-textSecondary group-hover:text-accentSecondary transition-colors">
-              Drag & drop PDF or click to browse
+            <h3 className="text-xl font-bold font-heading text-textPrimary mb-2">Click or Drag Resume PDF</h3>
+            <p className="text-sm font-ui text-textSecondary group-hover:text-accentSecondary transition-colors max-w-xs mx-auto leading-relaxed">
+              Upload your resume in PDF format to get started with the analysis
             </p>
           </label>
         </div>
       ) : (
-        <div className="h-full bg-surface rounded-xl p-6 flex flex-col items-center justify-center border border-borderDefault relative group">
-          <div className="w-16 h-16 bg-accentMuted rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+        <div className="w-full bg-backgroundAlt rounded-2xl p-6 flex items-center gap-6 border border-borderMedium relative group hover:border-accentPrimary/30 transition-colors">
+          <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-sm border border-borderLight flex-shrink-0">
             <FileText className="w-8 h-8 text-accentPrimary" />
           </div>
-          <h3 className="text-lg font-bold font-heading text-textPrimary text-center break-all px-4">{file.name}</h3>
-          <p className="text-sm font-ui text-textSecondary mt-1">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-bold font-heading text-textPrimary truncate">{file.name}</h3>
+            <p className="text-sm font-ui text-textSecondary mt-1">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          </div>
           
           <button
             onClick={onClear}
-            className="absolute top-2 right-2 p-2 hover:bg-surfaceHover rounded-full transition-colors text-textSecondary hover:text-textPrimary"
+            className="p-3 hover:bg-error/10 rounded-xl transition-colors text-textTertiary hover:text-error group-hover:opacity-100"
+            title="Remove file"
           >
             <X className="w-5 h-5" />
           </button>
