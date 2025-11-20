@@ -43,7 +43,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-textPrimary p-6 md:p-12 relative overflow-hidden font-body selection:bg-accentMuted">
+    <div className="min-h-screen bg-background text-textPrimary p-6 md:p-12 relative overflow-hidden font-body">
       {/* Animated Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-accentMuted/40 rounded-full mix-blend-multiply filter blur-[100px] animate-blob" />
