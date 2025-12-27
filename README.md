@@ -8,7 +8,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 ggg
 ## React Compiler
-
+hh
 The React Compiler is not enabled on this template because of its impact on dev & build performances jj . To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 bah
 ## Expanding the ESLint configuration
